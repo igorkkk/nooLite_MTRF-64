@@ -27,7 +27,6 @@ local analize = function()
     elseif gotRAW[6] == 20 then
         answer.lowbat = itm
     end
-    
     gotRAW = {}
     publ()
 end
