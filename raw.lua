@@ -1,7 +1,6 @@
 do
 if comm == "OFF" then node.restart() end
 local gotraw = function()
-    -- local rawpat = {}
     local rawk = 1
     local itm = ""
     local dat = ""
