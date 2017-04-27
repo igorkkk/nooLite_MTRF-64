@@ -1,6 +1,5 @@
 M={}
 M.publ = function(answer, call)
-    -- answer.adc = ""..adc.read(0) 
     answer.heap = ""..node.heap()
     local sendMQ
     local getd = coroutine.create(function()
