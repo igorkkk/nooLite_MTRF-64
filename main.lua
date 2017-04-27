@@ -1,6 +1,6 @@
 do
--- uart.alt(1)
--- uart.setup(0, 9600, 8, uart.PARITY_NONE, uart.STOPBITS_1, 0)
+uart.alt(1)
+uart.setup(0, 9600, 8, uart.PARITY_NONE, uart.STOPBITS_1, 0)
 answer = {}
 myClient = "noo01"
 mod = {} 
