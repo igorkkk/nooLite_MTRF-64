@@ -7,7 +7,7 @@ function setmqtt(myClient)
         m:lwt(myClient, 0, 0, 0)
         connecting = function ()
             connect = require('getmqtt')
-			-- Ниже "iot.eclipse.org" заменить на свой брокер, если есть. Или оставить.
+	    -- Ниже "iot.eclipse.org" заменить на свой брокер, если есть. Или оставить.
             connect.connecting(m, "iot.eclipse.org", 1883, myClient, mod, function() connect = nil end)
             begin, setmqtt = nil, nil
         end
