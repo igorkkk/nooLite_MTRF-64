@@ -7,6 +7,7 @@ M.publ = function(answer, call)
             sendMQ(k, v)
             coroutine.yield()
         end
+            answer = {}
             collectgarbage()
             if call then
                 M.publ,sendMQ, getd, M  = nil, nil, nil, nil
