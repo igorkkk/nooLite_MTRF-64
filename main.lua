@@ -55,6 +55,8 @@ uart.on("data",1,
             for _, v in pairs(gotRAW) do
                 s = s.."$"..string.format("%02X", v)
             end
+            -- 29.04.2017
+            answer = {}
             answer.raw = s
             dofile('analize.lua')
             clearUART()

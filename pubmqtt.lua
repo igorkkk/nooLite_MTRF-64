@@ -8,6 +8,8 @@ M.publ = function(answer, call)
             coroutine.yield()
         end
             collectgarbage()
+			-- 29.04.2017 clear table to send fot MQTT broker
+			answer = {}
             if call then
                 M.publ,sendMQ, getd, M  = nil, nil, nil, nil
                 package.loaded["pubmqtt"]=nil
