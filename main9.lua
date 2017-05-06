@@ -60,7 +60,7 @@ uart.on("data",1,
             for n, v in pairs(gotRAW) do
                 s = s..(n-1)..":"..string.format("%d", v).." "
             end
-            s = string.sub(s, 1, #s - 2)
+            s = string.sub(s, 1, #s - 1)
             answer.raw = s
             dofile('analize.lua')
             clearUART()
