@@ -1,7 +1,4 @@
 do
-if comm ~= "ON" and comm ~= "OFF" then
-    return 
-end
 local dealnow
 dealnow = function()
     pat[5] = itm
