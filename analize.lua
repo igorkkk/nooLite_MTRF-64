@@ -1,7 +1,7 @@
 do
 local analize = function()
     local itm = string.format("%02d", gotRAW[5])
-    if gotRAW[6] == 0 or gotRAW[6] == 2 or gotRAW[6] == 4 then
+    if gotRAW[6] < 6 then
         answer[itm] = gotRAW[6]
     elseif gotRAW[6] == 0x82 or gotRAW[6] == 25  then
         if gotRAW[11] == 255 then
