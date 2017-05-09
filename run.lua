@@ -2,7 +2,6 @@ do
 local dealnow
 dealnow = function()
     pat[5] = itm
-
     if func == "comm" then pat[2] = 0
         if comm == "ON" then pat[6] = 2
         else pat[6] = 0
