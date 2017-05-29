@@ -4,11 +4,14 @@ uart.setup(0, 9600, 8, uart.PARITY_NONE, uart.STOPBITS_1, 0)
 answer = {}
 myClient = "noo01"
 mod = {} 
-mod.publish = false
+mod.publish = true
+mod.broker = false
+stop25 = {}
+runbrt = {}
 -- UART
 crcR = 0
 gotRAW = {}
-counter = 1
+UARTbyte = 1
 startUART = false
 --------
 pat = {171,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,172}
@@ -17,15 +20,23 @@ itm = ""
 func = ""
 
 publ = function()
-    if mod.publish then
+    if mod.publish == true and mod.broker == true then
         local pu = require('pubmqtt')
         local unload = function () pu = nil end
         pu.publ(answer, unload)
-    end
+    else
+		tmr.create():alarm(5000,0, function() 
+			sendMQ, getd, M  = nil, nil, nil, nil
+    		mod.publish = true
+    		package.loaded["pubmqtt"]=nil
+			publ()
+		end)
+	
+	end
 end
 
 function clearUART()
-    counter = 1
+    UARTbyte = 1
     crcR = 0
 end
 --
@@ -35,29 +46,30 @@ uart.on("data",1,
         if (startUART == false and bt == 0xAD) or startUART == true  then
         startUART = true
         table.insert(gotRAW, bt)
-        if counter < 16 then
+        if UARTbyte < 16 then
             crcR = crcR + bt 
         end
-        if counter == 1 then
+        if UARTbyte == 1 then
             stUART = tmr.create()   
             stUART:alarm(1000, 0, function() 
                clearUART()
             end) 
         end
-        counter = counter + 1
+        UARTbyte = UARTbyte + 1
     end
     
-    if counter == 18 then
+    if UARTbyte == 18 then
         if gotRAW[1] == 0xAD and gotRAW[17] == 0xAE and (gotRAW[16]) == bit.band(crcR, 0xFF) then 
             tmr.stop(stUART)
             tmr.unregister(stUART)
             local s = ""
-            for _, v in pairs(gotRAW) do
-                s = s.."$"..string.format("%02X", v)
+            for n, v in ipairs(gotRAW) do
+                s = s..(n-1)..":"..string.format("%d", v).." "
             end
-            -- 29.04.2017
-            answer = {}
-            answer.raw = s
+            s = string.sub(s, 1, #s - 1)
+            table.insert(answer,{raw = s})
+            --uart.alt(0)
+            --uart.setup(0, 115200, 8, uart.PARITY_NONE, uart.STOPBITS_1, 1)
             dofile('analize.lua')
             clearUART()
         end
@@ -65,7 +77,6 @@ uart.on("data",1,
 end, 0)
 --]]
 function newdeal()
-    answer = {}
 	for i=2, 16 do
 		pat[i] = 0
 	end
@@ -79,6 +90,7 @@ function newdeal()
     for k,v in pairs(lis) do
         if k == fl then
             dofile(fl)
+            -- print("dofile", fl)
             return
         end
     end
@@ -89,4 +101,8 @@ f = loadfile("setmqtt.lua")
 f()
 setmqtt(myClient)
 f=nil
+tmr.create():alarm(60000,1,function()
+	publ()
+end)
+
 end
