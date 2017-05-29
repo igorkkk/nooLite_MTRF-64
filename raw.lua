@@ -1,5 +1,5 @@
 do
-if comm == "OFF" then node.restart() end
+if comm == "OFF" or comm == "ON" then node.restart() end
 local gotraw = function()
     local rawk = 1
     local itm = ""
