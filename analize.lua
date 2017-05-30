@@ -7,17 +7,14 @@ local analize = function()
 	local top ={}
     top[ttp] = "ON"
     
-	local swOff = function(tttp, tm, it)
+	local swOff = function(tttp, tm, call)
 		return function()
 			tmr.create():alarm(tm, 0, function()
-				-- uart.alt(0)
-                -- uart.setup(0, 115200, 8, uart.PARITY_NONE, uart.STOPBITS_1, 1)
 				local an = {}
 				an[tttp] = "OFF"
 				table.insert(answer, an)
 				publ()
-				-- _G.stop25[it].func = nil
-				-- _G.stop25[it] = nil
+                if call then call() end
 			end)
 		end
 	end
@@ -33,7 +30,12 @@ local analize = function()
 		local d = itms.."/changed"
 		tp[d] = "ON"
 		table.insert(answer,tp)
-	elseif gotRAW[6] == 130 or gotRAW[6] == 128  then
+    elseif gotRAW[6] == 6 then
+        if gotRAW[8] == 0 then
+             top[ttp] = "OFF"
+        end
+        table.insert(answer,top)
+	elseif gotRAW[6] == 130 then
         if gotRAW[11] == 0 then
             top[ttp] = "OFF"
             table.insert(answer,top)
@@ -60,25 +62,24 @@ local analize = function()
 		tp.lowbat = itms
         table.insert(answer,tp)
     elseif gotRAW[6] == 25 then
-            --uart.alt(0)
-            --uart.setup(0, 115200, 8, uart.PARITY_NONE, uart.STOPBITS_1, 1)
-		if stop25[itm] then
-			stop25[itm].func = nil
-			stop25[itm] = nil
-		end
+		local function close25()
+           local im = itm
+           if _G.stop25[im] ~= nil then
+			_G.stop25[im].func = nil
+			_G.stop25[im] = nil
+		   end
+        end
+		close25()
+		
 		table.insert(answer,top)
 		local tm = gotRAW[8] * 5 * 1000
 		if gotRAW[7] == 6 then
 			tm = (bit.lshift(gotRAW[9], 8) + gotRAW[8]) * 5 * 1000
 			if tm > 6870947 then tm = 6870947 end 
 		end
-		--local aa = {}
-		--aa.time = tm
-		--table.insert(answer,aa)
-		
 		if tm > 0 then
 			stop25[itm] = {}
-			stop25[itm].func = swOff(ttp, tm, itm)
+			stop25[itm].func = swOff(ttp, tm, close25)
 			stop25[itm].func()
 		end
 	end

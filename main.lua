@@ -102,7 +102,23 @@ f()
 setmqtt(myClient)
 f=nil
 tmr.create():alarm(60000,1,function()
-	publ()
+	--[[
+	uart.alt(0)
+    uart.setup(0, 115200, 8, uart.PARITY_NONE, uart.STOPBITS_1, 1)
+    tmr.create():alarm(2000,0,function()
+        print("\n\n\n\n\n\n\n\n\n\n\n\n\n=========== _G table: ===========")
+        table.foreach(_G, print)
+        print("===== package.loaded table: =====")
+        table.foreach(_G.package.loaded, print)
+        print("=================================")
+    --]]
+        tmr.create():alarm(7000,0,function()
+        --    uart.alt(1)
+        --    uart.setup(0, 9600, 8, uart.PARITY_NONE, uart.STOPBITS_1, 0)
+        	publ()
+        end)
+    -- end)
+
 end)
 
 end
