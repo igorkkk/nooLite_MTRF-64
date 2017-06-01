@@ -7,9 +7,9 @@ local analize = function()
 	local top ={}
     top[ttp] = "ON"
     
-	local swOff = function(tttp, tm, call)
+	local swOff = function(tttp, tm, tr, call)
 		return function()
-			tmr.create():alarm(tm, 0, function()
+			tr:alarm(tm, 0, function()
 				local an = {}
 				an[tttp] = "OFF"
 				table.insert(answer, an)
@@ -62,6 +62,9 @@ local analize = function()
            local im = itm
            if _G.stop25[im] ~= nil then
 			_G.stop25[im].func = nil
+			tmr.stop(_G.stop25[im].tmr)
+			tmr.unregister(_G.stop25[im].tmr)
+			_G.stop25[im].tmr = nil
 			_G.stop25[im] = nil
 		   end
         end
@@ -75,7 +78,8 @@ local analize = function()
 		end
 		if tm > 0 then
 			stop25[itm] = {}
-			stop25[itm].func = swOff(ttp, tm, close25)
+			stop25[itm].tmr = tmr.create()
+			stop25[itm].func = swOff(ttp, tm, stop25[itm].tmr, close25)
 			stop25[itm].func()
 		end
 	end
