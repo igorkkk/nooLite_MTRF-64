@@ -88,7 +88,6 @@ function newdeal()
     for k,v in pairs(lis) do
         if k == fl then
             dofile(fl)
-            -- print("dofile", fl)
             return
         end
     end

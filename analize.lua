@@ -36,12 +36,8 @@ local analize = function()
         end
         table.insert(answer,top)
 	elseif gotRAW[6] == 130 then
-        if gotRAW[11] == 0 then
-            top[ttp] = "OFF"
-            table.insert(answer,top)
-        else
-            table.insert(answer,top)
-        end
+        if gotRAW[11] == 0 then top[ttp] = "OFF" end
+        table.insert(answer,top)    
     elseif gotRAW[6] == 0x15 then
         local temp = 0
         local hempH = gotRAW[9]
