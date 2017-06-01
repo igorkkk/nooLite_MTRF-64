@@ -25,7 +25,7 @@ publ = function()
         local unload = function () pu = nil end
         pu.publ(answer, unload)
     else
-		tmr.create():alarm(5000,0, function() 
+		tmr.create():alarm(2500,0, function() 
 			sendMQ, getd, M  = nil, nil, nil, nil
     		mod.publish = true
     		package.loaded["pubmqtt"]=nil

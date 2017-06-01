@@ -13,6 +13,7 @@ function M.connecting(m, Broker, port, myCl, mod, unload)
                      end)
                     m:publish("from"..myClient,"ON",0,0)
                     _G.mod.broker = true
+                    _G.mod.publish = true
                     if unload then
                         getConnect, count = nil, nil
                         package.loaded["getmqtt"]=nil
