@@ -77,7 +77,9 @@ uart.on("data",1,
 end, 0)
 --]]
 function newdeal()
-	for i=2, 16 do pat[i] = 0 end
+	for i=2, 16 do
+		pat[i] = 0
+	end
     local lis = file.list()
     local fl
     if func ~= nil then 
@@ -88,6 +90,7 @@ function newdeal()
     for k,v in pairs(lis) do
         if k == fl then
             dofile(fl)
+            -- print("dofile", fl)
             return
         end
     end
