@@ -1,8 +1,6 @@
 do
 local dealnow
 dealnow = function()
--- 171,2,0,0,22,131,1,0,0,0,0,0,0,0,0 
-
 	local locitm = itm
 	local loccomm = comm
 	pat[5] = locitm
@@ -15,10 +13,7 @@ dealnow = function()
 		pat[8] = 0
 	end
 	dofile('writeMTRF.lua')
-   -- uart.alt(0)
-   -- uart.setup(0, 115200, 8, uart.PARITY_NONE, uart.STOPBITS_1, 1)
----[[
-
+--[[
     if loccomm == "OFF" then
     	tmr.create():alarm(20000, 0, function()
     		local pt = {171,2,0,0,0,9,0,0,0,0,0,0,0,0,0,0,172}
@@ -37,9 +32,7 @@ dealnow = function()
     		end
     	end)
     end
-    
---]]
-    
+--]]	
 end
 dealnow()
 end
