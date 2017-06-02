@@ -6,7 +6,6 @@ local analize = function()
     local tp = {}
 	local top ={}
     top[ttp] = "ON"
-    
 	local swOff = function(tttp, tm, call)
 		return function()
 			tmr.create():alarm(tm, 0, function()
