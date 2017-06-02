@@ -69,7 +69,6 @@ local analize = function()
 		   end
         end
 		close25()
-		
 		table.insert(answer,top)
 		local tm = gotRAW[8] * 5 * 1000
 		if gotRAW[7] == 6 then
