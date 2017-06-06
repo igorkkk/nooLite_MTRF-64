@@ -4,7 +4,6 @@ local gotraw = function()
     local rawk = 1
     local itm = ""
     local dat = ""
-    local dig = 0
     for i = 1, #comm do
         itm = string.sub(comm, i,i)
         if itm ~= "," then

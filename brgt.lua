@@ -1,6 +1,5 @@
 do
-local dealnow
-dealnow = function()
+local dealnow = function()
     function map(s)
         if  s <= 0 then return s end
         local d = 35 + s*120/100
