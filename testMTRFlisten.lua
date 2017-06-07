@@ -1,4 +1,5 @@
 do
+
 function setvars()
     answer = {}
     crcR = 0
@@ -50,7 +51,6 @@ function gotMTRF()
     end, 0)
 end
 gotMTRF()
-
 --
 tmr.create():alarm(300000, 0, function() 
     uart.on("data")
