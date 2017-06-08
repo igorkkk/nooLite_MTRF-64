@@ -53,7 +53,9 @@ dealnow = function()
        pat[2] = 1 
        pat[3] = 3 
        if comm == "ON" then pat[6] = 15
-       else pat[6] = 9
+       else 
+            pat[6] = 9
+            pat[3] = 5 
        end  
     end
 	dofile('writeMTRF.lua')
