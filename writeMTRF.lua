@@ -1,5 +1,6 @@
 do
- local cr = 0
+	comm, itm, func = "", "", ""
+	local cr = 0
     for i = 1, 15 do
         cr = cr + pat[i]     
     end
@@ -14,5 +15,5 @@ do
     for i=1,17 do
         uart.write(0, pat[i])
     end
-    comm, itm, func = "", "", ""
+
 end

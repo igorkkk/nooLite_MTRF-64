@@ -11,9 +11,9 @@ function M.connecting(m, Broker, port, myCl, mod, unload)
                     m:subscribe(myCl.."/#",0, function(conn)
                         -- print("Subscribed.")
                      end)
-                    if mod then mod.publish = true end
-                    answer.getmqtt = "Got Broker now"
-                    publ()
+                    m:publish("from"..myClient,"ON",0,0)
+                    _G.mod.broker = true
+                    _G.mod.publish = true
                     if unload then
                         getConnect, count = nil, nil
                         package.loaded["getmqtt"]=nil

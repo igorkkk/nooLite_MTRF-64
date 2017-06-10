@@ -14,18 +14,17 @@ dealnow = function()
         end
     end
 
-    if func == "coft" then pat[2] = 2
+    if func == "coft" then 
+        pat[2] = (itm > 20) and 2 or 0
         pat[6] = 25
         local time = tonumber(comm) or 0
         if time < 256 then 
             pat[7] = 5
             pat[8] = time 
-        elseif time < 65535 then 
+        else
             pat[7] = 6
             pat[8] = bit.band(time, 0xFF)
             pat[9] = bit.rshift(time, 8)
-        else
-            return
         end
     end
 
@@ -54,7 +53,9 @@ dealnow = function()
        pat[2] = 1 
        pat[3] = 3 
        if comm == "ON" then pat[6] = 15
-       else pat[6] = 9
+       else 
+            pat[6] = 9
+            pat[3] = 5 
        end  
     end
 	dofile('writeMTRF.lua')
