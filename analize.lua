@@ -1,4 +1,5 @@
 do
+-- for PU-112
 if gotRAW[6] > 15 and gotRAW[6] < 20  then
     local itms = string.format("%02d", gotRAW[5]) or "lost5"
     local coms = string.format("%02d", gotRAW[6]) or "lost6"
@@ -11,6 +12,7 @@ if gotRAW[6] > 15 and gotRAW[6] < 20  then
     publ()
 	return
 end
+-- end for PU-112 
 local analize = function()
 	local itm = gotRAW[5]
 	local itms = string.format("%02d", gotRAW[5])
