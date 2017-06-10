@@ -2,7 +2,6 @@ do
     --uart.alt(0)
     --uart.setup(0, 115200, 8, uart.PARITY_NONE, uart.STOPBITS_1, 1)
 	--print("rize!")
-
 local setbrgt = function(iitm)
     local risesteptime = 10
 	local patt = {171,0,0,0,0,6,1,0,0,0,0,0,0,0,0,0,172}
@@ -25,9 +24,7 @@ local setbrgt = function(iitm)
             uart.write(0, patt[i])
         end
     end
-    
     sendcom(brgtnow)
-    
     return function(call)
         tmr.create():alarm(risesteptime * 1000, 1, function(t)
             brgtnow = brgtnow + incr
@@ -54,7 +51,6 @@ local z = function()
 	publ()
 	_G.runbrt[litm] = {}
 	_G.runbrt[litm].stopbr = 0
-	
 	---[[
 	local r = function()
 		_G.runbrt[litm].func = nil
