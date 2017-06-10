@@ -1,6 +1,5 @@
 do
 if gotRAW[6] > 15 and gotRAW[6] < 20  then
-	-- dofile('ascenario.lua')
     local itms = string.format("%02d", gotRAW[5]) or "lost5"
     local coms = string.format("%02d", gotRAW[6]) or "lost6"
     local ttp = itms.."/scen"..coms
@@ -12,7 +11,6 @@ if gotRAW[6] > 15 and gotRAW[6] < 20  then
     publ()
 	return
 end
-
 local analize = function()
 	local itm = gotRAW[5]
 	local itms = string.format("%02d", gotRAW[5])
