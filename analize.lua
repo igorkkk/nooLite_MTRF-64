@@ -10,7 +10,7 @@ if gotRAW[6] > 15 and gotRAW[6] < 20  then
     table.insert(answer,top)
     gotRAW = {}
     publ()
-	return
+    return
 end
 -- end for PU-112 
 local analize = function()
