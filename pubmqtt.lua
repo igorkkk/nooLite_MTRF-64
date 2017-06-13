@@ -1,4 +1,4 @@
-M={}
+local M={}
 M.publ = function(answer, call)
 	mod.publish = false
 	local tobr = {}

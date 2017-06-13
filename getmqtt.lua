@@ -1,4 +1,4 @@
-M={}
+local M={}
 function M.connecting(m, Broker, port, myCl, mod, unload)
     local getConnect
     local count = 0
