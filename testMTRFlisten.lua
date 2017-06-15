@@ -1,5 +1,4 @@
 do
-
 function setvars()
     answer = {}
     crcR = 0
@@ -7,9 +6,7 @@ function setvars()
     counter = 1
     startUART = false
 end
-
 setvars()
-
 function ptrANSW()
     tmr.create():alarm(100, 0, function() 
         print(answer.raw)
@@ -19,7 +16,6 @@ function ptrANSW()
         end)
     end)
 end
-
 function gotMTRF()
     uart.alt(1)
     uart.setup(0, 9600, 8, uart.PARITY_NONE, uart.STOPBITS_1, 0)
