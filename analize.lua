@@ -1,18 +1,4 @@
 do
--- for PU-112
-if gotRAW[6] > 15 and gotRAW[6] < 20  then
-    local itms = string.format("%02d", gotRAW[5]) or "lost5"
-    local coms = string.format("%02d", gotRAW[6]) or "lost6"
-    local ttp = itms.."/scen"..coms
-    local tp = {}
-    local top ={}
-    top[ttp] = "ON"
-    table.insert(answer,top)
-    gotRAW = {}
-    publ()
-    return
-end
--- end for PU-112 
 local analize = function()
 	local itm = gotRAW[5]
 	local itms = string.format("%02d", gotRAW[5])
@@ -95,6 +81,12 @@ local analize = function()
 			stop25[itm].func = swOff(ttp, tm, stop25[itm].tmr, close25)
 			stop25[itm].func()
 		end
+	-- for PU-112
+	elseif gotRAW[6] > 15 and gotRAW[6] < 20  then
+		local coms = string.format("%02d", gotRAW[6]) or "lost6"
+		ttp = itms.."/scen"..coms
+		top[ttp] = "ON"
+		table.insert(answer,top)
 	end
     gotRAW = {}
     publ()
